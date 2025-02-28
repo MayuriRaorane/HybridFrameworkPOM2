@@ -16,6 +16,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -50,13 +51,16 @@ public class BaseClass {
 		Reporter.log("Test can be started", true);
 	}
 
+	@Parameters("browser")
 	@BeforeClass
-	public void setup() {
+	public void setup(String browser) {
 
 		Reporter.log("Trying to start browser - geeting application ready", true);
 
-		driver = BrowserFactory.startApplication(driver, config.getBrowser(), config.getStagingURL());
+		//driver = BrowserFactory.startApplication(driver, config.getBrowser(), config.getStagingURL());
 
+		driver = BrowserFactory.startApplication(driver, browser, config.getStagingURL());
+		
 		Reporter.log("Browser and application is up and running", true);
 	}
 
